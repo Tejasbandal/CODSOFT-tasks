@@ -1,0 +1,44 @@
+from tkinter import *
+
+def add_task():
+    task = entry.get()
+    if task:
+        listbox.insert(END, f"{listbox.size()+1}. {task}")  # Add the number in front of the task
+        entry.delete(0, END)
+
+def delete_task():
+    try:
+        index = listbox.curselection()[0]
+        listbox.delete(index)
+    except IndexError:
+        pass
+
+def main():
+    global entry, listbox
+
+    # Create the main window
+    root = Tk()
+    root.title("To-Do List")
+    root.configure(bg="black")  # Set the background color to black
+
+    # Create and configure the task entry widget
+    entry = Entry(root, width=40, bg="white", fg="#38B6FF", font=("Arial", 12))  # Set entry background to white and text color to Squuba Blue (#38B6FF)
+    entry.pack(pady=10)
+
+    # Create the task list widget
+    listbox = Listbox(root, width=40, bg="black", fg="white", font=("Arial", 12))  # Set listbox background to black and text color to white
+    listbox.pack()
+
+    # Create the Add Task button with a contrasting color (e.g., green)
+    add_button = Button(root, text="Add Task", command=add_task, bg="green", fg="white", font=("Arial", 12, "bold"))
+    add_button.pack(pady=5)
+
+    # Create the Delete Task button with a contrasting color (e.g., red)
+    delete_button = Button(root, text="Delete Task", command=delete_task, bg="red", fg="white", font=("Arial", 12, "bold"))
+    delete_button.pack(pady=5)
+
+    # Run the application
+    root.mainloop()
+
+if __name__ == '__main__':
+    main()
